@@ -3,6 +3,8 @@ package uni.fmi.masters.helloapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,9 @@ public class CowsAndBullsActivity extends AppCompatActivity {
     int lives = 10;
 
     Dialog customDialog;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     /**
      *
@@ -66,6 +71,9 @@ public class CowsAndBullsActivity extends AppCompatActivity {
 
         customDialog = new Dialog(this);
         customDialog.setContentView(R.layout.custom_dialog);
+
+        preferences = getPreferences(Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
         try {
             restartGame(null);
@@ -126,15 +134,36 @@ public class CowsAndBullsActivity extends AppCompatActivity {
     }
 
     public void endGame(boolean gameWon){
+
         guessB.setEnabled(false);
 
         TextView title = customDialog.findViewById(R.id.customDialogTitleTV);
         TextView content = customDialog.findViewById(R.id.customDialogMessageTV);
         Button cancelB = customDialog.findViewById(R.id.customDialogCancelB);
+        Button saveScoreB = customDialog.findViewById(R.id.customDialogSaveNameB);
+        EditText nameET = customDialog.findViewById(R.id.customDialogNameET);
+
+        saveScoreB.setVisibility(View.INVISIBLE);
+        nameET.setVisibility(View.INVISIBLE);
 
         if(gameWon){
+            int higestScore = preferences.getInt("HigestScore", 0);
+            String topUser = preferences.getString("TopUser", "");
+
+            int score = lives * 4;
+
             title.setText("Поздравления!!!");
-            content.setText("След дълги усилия събрахте стадото...");
+            if(score <= higestScore){
+                content.setText("След дълги усилия събрахте стадото...\n" +
+                        "Но не можахте да достигните висините на нашия топ кравар " + topUser);
+            }else{
+                content.setText("След дълги усилия събрахте стадото...\n" +
+                        "По добър кравар от вас НЕМАААА");
+
+                saveScoreB.setVisibility(View.VISIBLE);
+                nameET.setVisibility(View.VISIBLE);
+            }
+
         }else{
             title.setText("Загуба :(");
             content.setText("Кравите избягаха :(");
@@ -150,5 +179,20 @@ public class CowsAndBullsActivity extends AppCompatActivity {
         customDialog.setCanceledOnTouchOutside(false);
 
         customDialog.show();
+    }
+
+    public void saveTopResult(View view){
+        EditText nameET = customDialog.findViewById(R.id.customDialogNameET);
+        String name = nameET.getText().toString();
+        int score = lives * 4;
+
+        editor.putInt("HigestScore", score);
+        editor.putString("TopUser", name);
+
+        editor.apply();
+    }
+
+    public void showSettings(View view){
+
     }
 }
