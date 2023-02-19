@@ -44,11 +44,11 @@
         android:text="Guess my number" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/menuCowsB"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
-        android:text="Button" />
+        android:text="Cows and Bulls" />
 
     <LinearLayout
         android:layout_width="match_parent"

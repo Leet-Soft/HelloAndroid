@@ -13,6 +13,7 @@ public class MenuActivity extends AppCompatActivity {
     Button helloB;
     Button calculatorB;
     Button guessB;
+    Button cowsB;
 
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
@@ -29,6 +30,9 @@ public class MenuActivity extends AppCompatActivity {
                 case R.id.menuGuessB:
                     intent = new Intent(MenuActivity.this, GuessActivity.class);
                     break;
+                case R.id.menuCowsB:
+                    intent = new Intent(MenuActivity.this, CowsAndBullsActivity.class);
+                    break;
             }
 
             startActivity(intent);
@@ -44,9 +48,11 @@ public class MenuActivity extends AppCompatActivity {
         helloB = findViewById(R.id.menuHelloB);
         calculatorB = findViewById(R.id.menuCalculatorB);
         guessB = findViewById(R.id.menuGuessB);
+        cowsB = findViewById(R.id.menuCowsB);
 
         helloB.setOnClickListener(onClick);
         calculatorB.setOnClickListener(onClick);
         guessB.setOnClickListener(onClick);
+        cowsB.setOnClickListener(onClick);
     }
 }
