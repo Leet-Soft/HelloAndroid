@@ -3,6 +3,7 @@ package uni.fmi.masters.helloapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,7 @@ public class CowsAndBullsActivity extends AppCompatActivity {
         String num = random.nextInt(10) + "";
         result += num;
 
-        while(result.length() <= length){
+        while(result.length() < length){
             num = random.nextInt(10) + "";
 
             if(!uniqueLettersOnly || !result.contains(num)){
@@ -76,6 +77,8 @@ public class CowsAndBullsActivity extends AppCompatActivity {
         triesTV.setText(lives + "");
         hiddenNumber = generateNumber(4, true);
         historyTV.setText("");
+
+        Log.wtf("cheat", hiddenNumber);
     }
 
     public void guessTheNumber(View view){
