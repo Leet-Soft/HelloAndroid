@@ -2,6 +2,7 @@ package uni.fmi.masters.helloapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ public class CowsAndBullsActivity extends AppCompatActivity {
 
     String hiddenNumber;
     int lives = 10;
+
+    Dialog customDialog;
 
     /**
      *
@@ -61,6 +64,9 @@ public class CowsAndBullsActivity extends AppCompatActivity {
         guessB = findViewById(R.id.playB);
         historyTV = findViewById(R.id.numbersHistoryTV);
 
+        customDialog = new Dialog(this);
+        customDialog.setContentView(R.layout.custom_dialog);
+
         try {
             restartGame(null);
 
@@ -79,19 +85,27 @@ public class CowsAndBullsActivity extends AppCompatActivity {
         historyTV.setText("");
 
         Log.wtf("cheat", hiddenNumber);
+        customDialog.hide();
     }
 
     public void guessTheNumber(View view){
 
         String playerGuess = guessET.getText().toString();
 
-        historyTV.append(calculateCowsAndBulls(playerGuess));
+        String result = calculateCowsAndBulls(playerGuess);
+        historyTV.append(result);
 
         lives--;
         triesTV.setText("Оставащи опити: " + lives);
 
-        if(lives <= 0)
-            guessB.setEnabled(false);
+        if(result.contains("4 Б")){
+            endGame(true);
+        }
+
+        if(lives <= 0){
+          endGame(false);
+        }
+
 
     }
 
@@ -109,5 +123,32 @@ public class CowsAndBullsActivity extends AppCompatActivity {
         }
 
         return number + " - " + bulls + " Б, " + cows + " K\n";
+    }
+
+    public void endGame(boolean gameWon){
+        guessB.setEnabled(false);
+
+        TextView title = customDialog.findViewById(R.id.customDialogTitleTV);
+        TextView content = customDialog.findViewById(R.id.customDialogMessageTV);
+        Button cancelB = customDialog.findViewById(R.id.customDialogCancelB);
+
+        if(gameWon){
+            title.setText("Поздравления!!!");
+            content.setText("След дълги усилия събрахте стадото...");
+        }else{
+            title.setText("Загуба :(");
+            content.setText("Кравите избягаха :(");
+        }
+
+        cancelB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customDialog.hide();
+            }
+        });
+
+        customDialog.setCanceledOnTouchOutside(false);
+
+        customDialog.show();
     }
 }
