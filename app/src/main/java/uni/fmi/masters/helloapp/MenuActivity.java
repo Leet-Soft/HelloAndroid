@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -14,6 +13,7 @@ public class MenuActivity extends AppCompatActivity {
     Button calculatorB;
     Button guessB;
     Button cowsB;
+    Button cameraB;
 
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
@@ -33,6 +33,9 @@ public class MenuActivity extends AppCompatActivity {
                 case R.id.menuCowsB:
                     intent = new Intent(MenuActivity.this, CowsAndBullsActivity.class);
                     break;
+                case R.id.menuCameraB:
+                    intent = new Intent(MenuActivity.this, PlayingWithDeviceActivity.class);
+                    break;
             }
 
             startActivity(intent);
@@ -49,10 +52,12 @@ public class MenuActivity extends AppCompatActivity {
         calculatorB = findViewById(R.id.menuCalculatorB);
         guessB = findViewById(R.id.menuGuessB);
         cowsB = findViewById(R.id.menuCowsB);
+        cameraB = findViewById(R.id.menuCameraB);
 
         helloB.setOnClickListener(onClick);
         calculatorB.setOnClickListener(onClick);
         guessB.setOnClickListener(onClick);
         cowsB.setOnClickListener(onClick);
+        cameraB.setOnClickListener(onClick);
     }
 }
