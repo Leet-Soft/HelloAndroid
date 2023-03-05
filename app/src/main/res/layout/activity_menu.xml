@@ -71,10 +71,10 @@
             android:text="Shopping List" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/menuRandomButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Random Button" />
     </LinearLayout>
 </LinearLayout>

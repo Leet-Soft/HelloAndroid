@@ -20,7 +20,7 @@ import uni.fmi.masters.helloapp.entity.ShoppingItem;
 public class ShoppingListAdapter
         extends RecyclerView.Adapter<ShoppingListAdapter.MyViewHolder>{
 
-    static List<ShoppingItem> itemList;
+    List<ShoppingItem> itemList;
 
     ShoppingListAdapter(List<ShoppingItem> itemList){
         this.itemList = itemList;

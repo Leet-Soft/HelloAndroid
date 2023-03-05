@@ -16,6 +16,7 @@ public class MenuActivity extends AppCompatActivity {
     Button cowsB;
     Button cameraB;
     Button shoppingListB;
+    Button randomB;
 
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
@@ -41,6 +42,9 @@ public class MenuActivity extends AppCompatActivity {
                 case R.id.menuShoppingListB:
                     intent = new Intent(MenuActivity.this, ShoppingListActivity.class);
                     break;
+                case R.id.menuRandomButton:
+                    intent = new Intent(MenuActivity.this, RandomButtonActivity.class);
+                    break;
             }
 
             startActivity(intent);
@@ -59,6 +63,7 @@ public class MenuActivity extends AppCompatActivity {
         cowsB = findViewById(R.id.menuCowsB);
         cameraB = findViewById(R.id.menuCameraB);
         shoppingListB = findViewById(R.id.menuShoppingListB);
+        randomB = findViewById(R.id.menuRandomButton);
 
         helloB.setOnClickListener(onClick);
         calculatorB.setOnClickListener(onClick);
@@ -66,5 +71,6 @@ public class MenuActivity extends AppCompatActivity {
         cowsB.setOnClickListener(onClick);
         cameraB.setOnClickListener(onClick);
         shoppingListB.setOnClickListener(onClick);
+        randomB.setOnClickListener(onClick);
     }
 }

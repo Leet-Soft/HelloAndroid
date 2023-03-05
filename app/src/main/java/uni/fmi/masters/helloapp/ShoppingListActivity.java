@@ -22,12 +22,13 @@ import java.util.List;
 import uni.fmi.masters.helloapp.databinding.ActivityShoppingListBinding;
 import uni.fmi.masters.helloapp.entity.ShoppingItem;
 
-public class ShoppingListActivity extends AppCompatActivity {
+public class ShoppingListActivity
+        extends AppCompatActivity implements AddEditDialog.okButtonListener{
 
     RecyclerView shoppingList;
     FloatingActionButton fab;
     ShoppingListAdapter adapter;
-    static List<ShoppingItem> items = new ArrayList<>();
+    List<ShoppingItem> items = new ArrayList<>();
 
 
     @Override
@@ -57,15 +58,15 @@ public class ShoppingListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new AddEditDialog(ShoppingListActivity.this);
-
-
-                adapter.notifyDataSetChanged();
-
-
+                AddEditDialog customDialog = new AddEditDialog(ShoppingListActivity.this);
+                customDialog.setListener(ShoppingListActivity.this);
             }
         });
     }
 
-
+    @Override
+    public void onOkButtonClicked(ShoppingItem item) {
+        adapter.itemList.add(item);
+        adapter.notifyDataSetChanged();
+    }
 }

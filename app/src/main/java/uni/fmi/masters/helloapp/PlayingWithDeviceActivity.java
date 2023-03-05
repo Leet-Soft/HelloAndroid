@@ -71,7 +71,7 @@ public class PlayingWithDeviceActivity extends AppCompatActivity {
                     , Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
 
                 ActivityCompat.requestPermissions(PlayingWithDeviceActivity.this,
-                        new String[] { Manifest.permission.CAMERA}, IMAGE_CAPTURE);
+                        new String[] { Manifest.permission.CAMERA }, IMAGE_CAPTURE);
 
             }else{
                 takePicture();

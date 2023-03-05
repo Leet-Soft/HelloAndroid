@@ -15,6 +15,9 @@
         android:theme="@style/Theme.HelloApp"
         tools:targetApi="31">
         <activity
+            android:name=".RandomButtonActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShoppingListActivity"
             android:exported="false"
             android:label="@string/title_activity_shopping_list"

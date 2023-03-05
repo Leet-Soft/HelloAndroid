@@ -17,6 +17,13 @@ public class AddEditDialog extends Dialog {
     EditText measureET;
     Button okB;
     Button cancelB;
+
+    okButtonListener listener;
+
+    public void setListener(okButtonListener listener){
+        this.listener = listener;
+    }
+
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -24,7 +31,12 @@ public class AddEditDialog extends Dialog {
             double quantity = Double.parseDouble(quantityET.getText().toString());
             String measure = measureET.getText().toString();
 
-            ShoppingListAdapter.itemList.add(new ShoppingItem(name,quantity, measure));
+            ShoppingItem item = new ShoppingItem(name,quantity, measure);
+
+            if(listener != null){
+                listener.onOkButtonClicked(item);
+            }
+
             hide();
         }
     };
@@ -55,6 +67,8 @@ public class AddEditDialog extends Dialog {
         show();
     }
 
-
+    public interface okButtonListener  {
+        void onOkButtonClicked(ShoppingItem item);
+    }
 
 }
